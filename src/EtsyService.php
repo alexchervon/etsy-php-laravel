@@ -59,7 +59,7 @@ class EtsyService
         $temporaryCredentials = $this->server->getTemporaryCredentials();
 
         // Store credentials in the session, we'll need them later
-        Session::put('temporary_credentials', $temporaryCredentials);
+        \Session::put('temporary_credentials', $temporaryCredentials);
 
         return $this->server->getAuthorizationUrl($temporaryCredentials);
     }
@@ -72,7 +72,7 @@ class EtsyService
     public function approve($token, $verifier)
     {
         // Retrieve the temporary credentials we saved before
-        $temporaryCredentials = Session::get('temporary_credentials');
+        $temporaryCredentials = \Session::get('temporary_credentials');
 
         return $this->server->getTokenCredentials($temporaryCredentials, $token, $verifier);
     }
